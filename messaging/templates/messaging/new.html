@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}New Message — MiniSocial{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="card p-4">
+      <h2>New Message</h2>
+      <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label class="form-label">Recipient</label>
+          <select name="recipient_id" class="form-select" required>
+            <option value="">Select user...</option>
+            {% for u in users %}
+              <option value="{{ u.pk }}" {% if request.GET.recipient == u.pk|stringformat:'s' %}selected{% endif %}>{{ u.username }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Message</label>
+          <textarea name="text" class="form-control" rows="3" required></textarea>
+        </div>
+        <button class="btn btn-primary w-100" type="submit"><i class="bi bi-send"></i> Send</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

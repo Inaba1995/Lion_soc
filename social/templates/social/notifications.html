@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Notifications — MiniSocial{% endblock %}
+{% block content %}
+<h2 class="mb-4"><i class="bi bi-bell"></i> Notifications</h2>
+{% for n in notifications %}
+  <div class="card mb-2">
+    <div class="card-body d-flex justify-content-between">
+      <span>{{ n.text }}</span>
+      <small class="text-muted">{{ n.created_at|timesince }} ago</small>
+    </div>
+  </div>
+{% empty %}
+  <p class="text-muted">No notifications.</p>
+{% endfor %}
+{% endblock %}
